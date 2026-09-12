@@ -1,0 +1,393 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1400 800"
+     width="1400"
+     height="800">
+
+  <defs>
+    <!-- Background -->
+    <radialGradient id="bg" cx="50%" cy="75%" r="65%">
+      <stop offset="0" stop-color="#06161c"/>
+      <stop offset=".45" stop-color="#02080b"/>
+      <stop offset="1" stop-color="#010203"/>
+    </radialGradient>
+
+    <!-- Cyan atmosphere -->
+    <radialGradient id="atmosphere">
+      <stop offset="0" stop-color="#00eaff" stop-opacity=".22"/>
+      <stop offset=".45" stop-color="#00eaff" stop-opacity=".07"/>
+      <stop offset="1" stop-color="#00eaff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Glow -->
+    <filter id="cyanGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+
+    <!-- Globe clip -->
+    <clipPath id="sphere">
+      <circle cx="700" cy="650" r="128"/>
+    </clipPath>
+  </defs>
+
+  <!-- ================================================= -->
+  <!-- BACKGROUND -->
+  <!-- ================================================= -->
+
+  <rect width="1400" height="800" fill="url(#bg)"/>
+
+  <!-- Stars -->
+  <g fill="#a9b7c8">
+    <g opacity=".7">
+      <circle cx="83" cy="430" r=".7"/>
+      <circle cx="151" cy="505" r=".5"/>
+      <circle cx="205" cy="444" r=".8"/>
+      <circle cx="267" cy="558" r=".5"/>
+      <circle cx="331" cy="468" r=".6"/>
+      <circle cx="401" cy="530" r=".7"/>
+      <circle cx="462" cy="438" r=".5"/>
+      <circle cx="527" cy="492" r=".7"/>
+      <circle cx="572" cy="425" r=".5"/>
+
+      <circle cx="834" cy="442" r=".7"/>
+      <circle cx="891" cy="496" r=".5"/>
+      <circle cx="954" cy="428" r=".7"/>
+      <circle cx="1021" cy="476" r=".5"/>
+      <circle cx="1084" cy="438" r=".8"/>
+      <circle cx="1152" cy="516" r=".6"/>
+      <circle cx="1228" cy="449" r=".7"/>
+      <circle cx="1305" cy="535" r=".5"/>
+      <circle cx="1360" cy="431" r=".7"/>
+
+      <circle cx="120" cy="670" r=".6"/>
+      <circle cx="311" cy="687" r=".7"/>
+      <circle cx="425" cy="620" r=".5"/>
+      <circle cx="1001" cy="666" r=".6"/>
+      <circle cx="1172" cy="620" r=".7"/>
+      <circle cx="1290" cy="688" r=".5"/>
+    </g>
+
+    <!-- tiny cyan stars -->
+    <g fill="#00eaff" opacity=".5">
+      <circle cx="191" cy="475" r=".8"/>
+      <circle cx="441" cy="473" r=".6"/>
+      <circle cx="941" cy="471" r=".7"/>
+      <circle cx="1244" cy="494" r=".6"/>
+    </g>
+  </g>
+
+  <!-- ================================================= -->
+  <!-- CENTRAL ATMOSPHERE -->
+  <!-- ================================================= -->
+
+  <circle cx="700" cy="650"
+          r="245"
+          fill="url(#atmosphere)">
+    <animate attributeName="r"
+             values="225;250;225"
+             dur="5s"
+             repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ================================================= -->
+  <!-- ORBITAL SYSTEM -->
+  <!-- ================================================= -->
+
+  <g transform="translate(700 650)"
+     fill="none"
+     stroke-linecap="round">
+
+    <!-- outer cyan orbit -->
+    <ellipse rx="270" ry="74"
+             stroke="#00eaff"
+             stroke-width="1"
+             opacity=".35">
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from="0"
+        to="360"
+        dur="24s"
+        repeatCount="indefinite"/>
+    </ellipse>
+
+    <!-- purple orbit -->
+    <ellipse rx="250" ry="112"
+             stroke="#7545ff"
+             stroke-width="1"
+             opacity=".35">
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from="360"
+        to="0"
+        dur="32s"
+        repeatCount="indefinite"/>
+    </ellipse>
+
+    <!-- gold orbit -->
+    <ellipse rx="225" ry="145"
+             stroke="#ffb300"
+             stroke-width=".8"
+             opacity=".32">
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from="0"
+        to="360"
+        dur="38s"
+        repeatCount="indefinite"/>
+    </ellipse>
+
+    <!-- green tilted orbit -->
+    <ellipse rx="240" ry="100"
+             stroke="#9cff00"
+             stroke-width=".8"
+             opacity=".3"
+             transform="rotate(24)">
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from="24"
+        to="384"
+        dur="30s"
+        repeatCount="indefinite"/>
+    </ellipse>
+
+    <!-- pink equator -->
+    <ellipse rx="282" ry="21"
+             stroke="#ff4c92"
+             stroke-width=".8"
+             opacity=".5"/>
+
+    <!-- vertical orbit -->
+    <ellipse rx="145" ry="275"
+             stroke="#00eaff"
+             stroke-width=".7"
+             opacity=".18">
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from="0"
+        to="360"
+        dur="42s"
+        repeatCount="indefinite"/>
+    </ellipse>
+
+  </g>
+
+  <!-- ================================================= -->
+  <!-- 3D WIREFRAME GLOBE -->
+  <!-- ================================================= -->
+
+  <g fill="none"
+     stroke="#00eaff"
+     stroke-width="1.35"
+     opacity=".9">
+
+    <!-- sphere -->
+    <circle cx="700" cy="650" r="128"/>
+
+    <!-- longitude -->
+    <ellipse cx="700" cy="650"
+             rx="102" ry="128"/>
+
+    <ellipse cx="700" cy="650"
+             rx="62" ry="128"/>
+
+    <ellipse cx="700" cy="650"
+             rx="25" ry="128"/>
+
+    <!-- latitude -->
+    <ellipse cx="700" cy="650"
+             rx="128" ry="38"/>
+
+    <ellipse cx="700" cy="650"
+             rx="128" ry="72"/>
+
+    <ellipse cx="700" cy="650"
+             rx="128" ry="103"/>
+
+  </g>
+
+  <!-- ================================================= -->
+  <!-- ROTATING INNER GEOMETRY -->
+  <!-- ================================================= -->
+
+  <g transform="translate(700 650)">
+
+    <g fill="none"
+       stroke="#00f0ff"
+       stroke-width="1"
+       opacity=".8">
+
+      <polygon points="0,-106
+                       92,-53
+                       92,53
+                       0,106
+                       -92,53
+                       -92,-53"/>
+
+      <polygon points="0,-77
+                       67,-39
+                       67,39
+                       0,77
+                       -67,39
+                       -67,-39"/>
+
+      <polygon points="0,-46
+                       40,-23
+                       40,23
+                       0,46
+                       -40,23
+                       -40,-23"/>
+
+      <path d="M-92 -53 L67 39"/>
+      <path d="M-92 53 L67 -39"/>
+      <path d="M92 -53 L-67 39"/>
+      <path d="M92 53 L-67 -39"/>
+
+    </g>
+
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="0 700 650"
+      to="360 700 650"
+      dur="18s"
+      repeatCount="indefinite"/>
+
+  </g>
+
+  <!-- ================================================= -->
+  <!-- FLOATING CERTIFICATION NODES -->
+  <!-- ================================================= -->
+
+  <!-- left pink -->
+  <g filter="url(#cyanGlow)">
+    <circle cx="466" cy="657" r="8" fill="#ff5b9a"/>
+    <circle cx="466" cy="657" r="22"
+            fill="#ff5b9a"
+            opacity=".12"
+            filter="url(#softGlow)">
+      <animate attributeName="r"
+               values="16;30;16"
+               dur="2.4s"
+               repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- left green -->
+  <g filter="url(#cyanGlow)">
+    <circle cx="492" cy="685" r="10" fill="#9cff00"/>
+  </g>
+
+  <!-- upper left cyan -->
+  <g filter="url(#cyanGlow)">
+    <circle cx="584" cy="639" r="7" fill="#55dfff"/>
+  </g>
+
+  <!-- upper right purple -->
+  <g filter="url(#cyanGlow)">
+    <circle cx="871" cy="592" r="8" fill="#874cff"/>
+  </g>
+
+  <!-- bottom cyan -->
+  <g filter="url(#cyanGlow)">
+    <circle cx="525" cy="752" r="14" fill="#00dfff"/>
+  </g>
+
+  <!-- bottom gold -->
+  <g filter="url(#cyanGlow)">
+    <circle cx="766" cy="751" r="13" fill="#ffae00"/>
+  </g>
+
+  <!-- right cyan -->
+  <g filter="url(#cyanGlow)">
+    <circle cx="901" cy="731" r="9" fill="#00eaff"/>
+  </g>
+
+  <!-- ================================================= -->
+  <!-- ORBITING PARTICLES -->
+  <!-- ================================================= -->
+
+  <g>
+
+    <circle r="6" fill="#00eaff" filter="url(#cyanGlow)">
+      <animateMotion
+        dur="8s"
+        repeatCount="indefinite"
+        path="M430 650
+              C500 510 650 500 840 590
+              C990 660 850 790 690 760
+              C540 735 430 650 430 650"/>
+    </circle>
+
+    <circle r="5" fill="#8b4cff" filter="url(#cyanGlow)">
+      <animateMotion
+        dur="11s"
+        repeatCount="indefinite"
+        path="M930 650
+              C860 520 700 510 530 610
+              C430 680 570 790 730 770
+              C850 750 930 650 930 650"/>
+    </circle>
+
+  </g>
+
+  <!-- ================================================= -->
+  <!-- CENTER CORE -->
+  <!-- ================================================= -->
+
+  <circle cx="700"
+          cy="650"
+          r="7"
+          fill="#00ffff"
+          filter="url(#cyanGlow)">
+    <animate attributeName="r"
+             values="5;10;5"
+             dur="2s"
+             repeatCount="indefinite"/>
+  </circle>
+
+  <circle cx="700"
+          cy="650"
+          r="25"
+          fill="none"
+          stroke="#00eaff"
+          stroke-width=".7"
+          opacity=".35">
+    <animate attributeName="r"
+             values="18;35;18"
+             dur="3s"
+             repeatCount="indefinite"/>
+    <animate attributeName="opacity"
+             values=".5;0;.5"
+             dur="3s"
+             repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ================================================= -->
+  <!-- CERTIFICATION LABELS -->
+  <!-- ================================================= -->
+
+  <g font-family="monospace"
+     font-size="9"
+     letter-spacing="2"
+     fill="#8495aa">
+
+    <text x="430" y="675">CLOUD</text>
+    <text x="840" y="575">VERIFIED</text>
+    <text x="485" y="780">CERT-01</text>
+    <text x="890" y="755">CERT-07</text>
+
+  </g>
+
+</svg>

@@ -1,5 +1,9 @@
 # Certiverse
 
+<p align="center">
+  <img src="assets/orbit-globe.svg" alt="Animated 3D orbit globe" width="100%"/>
+</p>
+
 Your certifications as an interactive 3D solar system. Each credential is an orbiting node you can inspect, search, and filter.
 
 **Live demo:** https://adam-zs.github.io/certiverse/

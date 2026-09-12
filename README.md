@@ -1,4 +1,4 @@
-# Certiverse
+<h1 align="center">Certiverse</h1>
 
 <p align="center">
   <img src="assets/certiverse-logo.svg" alt="Certiverse logo" width="200"/>

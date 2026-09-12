@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 300 300"
+     width="300"
+     height="300">
+
+<defs>
+  <radialGradient id="g">
+    <stop stop-color="#00eaff" stop-opacity=".25"/>
+    <stop offset="1" stop-color="#00eaff" stop-opacity="0"/>
+  </radialGradient>
+
+  <filter id="glow">
+    <feGaussianBlur stdDeviation="3" result="b"/>
+    <feMerge>
+      <feMergeNode in="b"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+
+  <filter id="big">
+    <feGaussianBlur stdDeviation="10"/>
+  </filter>
+</defs>
+
+<!-- background -->
+<rect width="300" height="300" fill="#010305"/>
+
+<!-- stars -->
+<g fill="#78909c" opacity=".7">
+  <circle cx="18" cy="82" r=".6"/>
+  <circle cx="43" cy="42" r=".5"/>
+  <circle cx="70" cy="105" r=".7"/>
+  <circle cx="92" cy="32" r=".5"/>
+  <circle cx="224" cy="44" r=".6"/>
+  <circle cx="260" cy="91" r=".7"/>
+  <circle cx="282" cy="48" r=".5"/>
+  <circle cx="25" cy="205" r=".6"/>
+  <circle cx="55" cy="250" r=".5"/>
+  <circle cx="245" cy="220" r=".6"/>
+  <circle cx="278" cy="180" r=".5"/>
+</g>
+
+<!-- atmosphere -->
+<circle cx="150" cy="165"
+        r="105"
+        fill="url(#g)"
+        filter="url(#big)">
+  <animate attributeName="r"
+           values="95;110;95"
+           dur="4s"
+           repeatCount="indefinite"/>
+</circle>
+
+<!-- orbit system -->
+<g transform="translate(150 165)"
+   fill="none">
+
+  <ellipse rx="105" ry="28"
+           stroke="#00eaff"
+           stroke-width=".7"
+           opacity=".5">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="0"
+      to="360"
+      dur="12s"
+      repeatCount="indefinite"/>
+  </ellipse>
+
+  <ellipse rx="95" ry="48"
+           stroke="#754cff"
+           stroke-width=".7"
+           opacity=".4">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="360"
+      to="0"
+      dur="18s"
+      repeatCount="indefinite"/>
+  </ellipse>
+
+  <ellipse rx="82" ry="62"
+           stroke="#ffad00"
+           stroke-width=".6"
+           opacity=".35">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="0"
+      to="360"
+      dur="22s"
+      repeatCount="indefinite"/>
+  </ellipse>
+
+  <ellipse rx="110" ry="9"
+           stroke="#ff4f9a"
+           stroke-width=".6"
+           opacity=".5"/>
+
+</g>
+
+<!-- globe -->
+<g fill="none"
+   stroke="#00eaff"
+   stroke-width=".9"
+   opacity=".85">
+
+  <circle cx="150" cy="165" r="58"/>
+
+  <ellipse cx="150" cy="165"
+           rx="42" ry="58"/>
+
+  <ellipse cx="150" cy="165"
+           rx="20" ry="58"/>
+
+  <ellipse cx="150" cy="165"
+           rx="58" ry="20"/>
+
+  <ellipse cx="150" cy="165"
+           rx="58" ry="38"/>
+
+  <path d="M92 165H208"/>
+  <path d="M103 125L197 205"/>
+  <path d="M103 205L197 125"/>
+
+</g>
+
+<!-- inner rotating geometry -->
+<g transform="translate(150 165)"
+   fill="none"
+   stroke="#00f5ff"
+   stroke-width=".8">
+
+  <polygon points="0,-48 42,-24 42,24 0,48 -42,24 -42,-24"/>
+  <polygon points="0,-30 26,-15 26,15 0,30 -26,15 -26,-15"/>
+
+  <animateTransform
+    attributeName="transform"
+    type="rotate"
+    from="0 150 165"
+    to="360 150 165"
+    dur="9s"
+    repeatCount="indefinite"/>
+
+</g>
+
+<!-- center -->
+<circle cx="150"
+        cy="165"
+        r="20"
+        fill="#00eaff"
+        opacity=".12"
+        filter="url(#big)">
+  <animate attributeName="r"
+           values="15;24;15"
+           dur="2s"
+           repeatCount="indefinite"/>
+</circle>
+
+<circle cx="150"
+        cy="165"
+        r="3"
+        fill="#fff"
+        filter="url(#glow)"/>
+
+<!-- nodes -->
+<g filter="url(#glow)">
+
+  <circle cx="65" cy="165"
+          r="5"
+          fill="#ff4f9a"/>
+
+  <circle cx="82" cy="191"
+          r="5"
+          fill="#9cff00"/>
+
+  <circle cx="225" cy="137"
+          r="5"
+          fill="#8b4cff"/>
+
+  <circle cx="230" cy="207"
+          r="6"
+          fill="#ffae00"/>
+
+  <circle cx="205" cy="235"
+          r="4"
+          fill="#00eaff"/>
+
+</g>
+
+<!-- moving particles -->
+<circle r="3"
+        fill="#00ffff"
+        filter="url(#glow)">
+  <animateMotion
+    dur="5s"
+    repeatCount="indefinite"
+    path="M55 165
+          C80 90 180 90 235 140
+          C260 180 215 235 150 230
+          C90 225 55 195 55 165"/>
+</circle>
+
+<circle r="2.5"
+        fill="#8b4cff"
+        filter="url(#glow)">
+  <animateMotion
+    dur="7s"
+    repeatCount="indefinite"
+    path="M230 200
+          C205 100 100 95 65 165
+          C40 220 115 245 175 230
+          C215 220 230 200 230 200"/>
+</circle>
+
+<!-- tiny labels -->
+<g font-family="monospace"
+   font-size="5"
+   letter-spacing="1"
+   fill="#78909c">
+
+  <text x="48" y="178">CERT</text>
+  <text x="225" y="128">VERIFIED</text>
+  <text x="205" y="247">NODE</text>
+
+</g>
+
+</svg>

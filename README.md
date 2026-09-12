@@ -1,6 +1,11 @@
 <h1 align="center">Certiverse</h1>
 
 <p align="center">
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-00eaff.svg"></a>
+  <a href="CONTRIBUTING.md"><img alt="Contributing" src="https://img.shields.io/badge/contributing-welcome-754cff.svg"></a>
+</p>
+
+<p align="center">
   <img src="assets/certiverse-logo.svg" alt="Certiverse logo" width="200"/>
 </p>
 

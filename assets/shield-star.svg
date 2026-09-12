@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 46" width="300" height="46" role="img" aria-label="Leave a star">
+  <defs>
+    <linearGradient id="star" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="298" height="44" rx="12" fill="#0B1220" stroke="#F59E0B" stroke-width="1.5"/>
+  <path d="M27 16 L31 25 L41 25 L33 31 L36 41 L27 35 L18 41 L21 31 L13 25 L23 25 Z" fill="url(#star)"/>
+  <text x="115" y="33" text-anchor="middle" font-family="monospace" font-size="16" letter-spacing="2" fill="#E6EAF0">IF THIS HELPS YOU — STAR IT</text>
+</svg>

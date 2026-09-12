@@ -1,71 +1,131 @@
-# Credential Orbit
+<p align="center">
+  <img src="assets/orbit-hero.svg" alt="Credential Orbit — a 3D solar system for your certificates" width="100%"/>
+</p>
 
-An interactive, dark-mode credential showcase rendered as a 3D solar system — each certificate is an orbiting node. Click a node (or the archive grid below) to inspect details, verify links, images, and expiry dates.
+<p align="center">
+  <strong>your certificates, rendered as an interactive solar system.</strong><br/>
+  every credential becomes an orbiting body. click a node to open its file.
+</p>
 
-> **Live demo:** https://adam-zs.github.io/credential-orbit/
->
-> The demo ships with fictional sample data so you can see the UI in action without exposing anyone's credentials.
+<p align="center">
+  <a href="https://adam-zs.github.io/credential-orbit/">
+    <img src="assets/shield-demo.svg" alt="VIEW LIVE DEMO" width="340"/>
+  </a>
+</p>
 
-![Credential Orbit screenshot](assets/screenshot.png)
+<p align="center">
+  <img src="assets/shield-stack.svg" alt="HTML · CSS · JS · Three.js" width="340"/>
+</p>
 
-## Features
+---
 
-- Interactive Three.js 3D core — orbit rings per category, hover tooltips, click-to-filter
-- Cinematic boot sequence with a skip button
-- Search (press `/`), category filters, RESET, and FEATURED / NEWEST / OLDEST sorting
-- Live result counter
-- Detail modal: image (fit-to-panel, never cropped), readable dates, optional expiry, category badges, verification link, PDF viewer link
-- Verified badges only when a real public verification link exists — no fake "verified" claims
-- Graceful fallback: full grid archive works even without WebGL
-- Social preview card (`og:image`) + favicon for rich link sharing
+### `>_` mission log
 
-## Tech stack
+```txt
+> credential-orbit --boot
+initializing three.js core .................... OK
+calculating orbital mechanics (7 bodies) ....... OK
+mapping categories to ring colors ............. OK
+binding search, sort, filters ................. OK
+rendering archive grid ........................ OK
+SYSTEM ONLINE — click anywhere.
+```
 
-- HTML / CSS / JavaScript (vanilla, no build step)
-- Three.js r158 via jsDelivr
-- GitHub Pages hosting (works on any static host: Netlify, Vercel, etc.)
+a single `data.js` array becomes a living constellation: the visuals, the filters, the orbit rings, the stats — all generated from your data. **no build step, no frameworks, no accounts.**
 
-## Quick start
+> [!NOTE]
+> This is a **demo build** with fictional sample records. Fork it, drop in your own
+> credentials, and ship your private archive in the time it takes to make a coffee.
+
+---
+
+### orbit rings
+
+```
+CYBERSECURITY  ● #00E5FF   ARTIFICIAL INTELLIGENCE ● #8B5CF6
+PENETRATION TESTING  ●     DATA SCIENCE       ● #60A5FA
+CLOUD          ● #F59E0B   NETWORKING        ● #F472B6
+...every category you add gets an orbit ring and a filter chip.
+```
+
+each category is a **ring**, each credential a **node**, each person a **viewer**. hover to preview, click to focus, press `/` to search the whole system.
+
+### flight features
+
+| console | behavior |
+|---|---|
+| `SEARCH` | live text filter — `/` focuses the field |
+| `FEATURED / NEWEST / OLDEST` | sort the archive like mission priorities |
+| category chips | one click filters every card + highlights the ring |
+| detail panel | fit-to-panel image (never cropped), readable dates, optional expiry, multi-badge categories, verify/open-PDF actions |
+| verified badges | shown **only** when a real public verification URL exists — no fake claims |
+| boot sequence | cinematic typewriter intro with a `SKIP` path |
+| graceful fallback | full archive works even with WebGL disabled |
+
+---
+
+### how it works
+
+```
+        ┌─────────────┐        ┌───────────────┐        ┌──────────────────┐
+        │  data.js    │        │   orbit core  │        │     archive      │
+        │  your      ─┼───────▶│  three.js 3D  │───────▶│   search grid    │
+        │  credentials│        │  ring + nodes │        │   + detail panel │
+        └─────────────┘        └───────────────┘        └──────────────────┘
+              ▲                                                     ▲
+              └────────── one source of truth ──────────────────────┘
+```
+
+- `data.js` declares every credential.
+- one normalize pass derives categories, stats, colors, and sorting.
+- the same data drives the 3D core **and** the accessible grid below.
+
+---
+
+### quick start
 
 ```bash
 git clone https://github.com/Adam-ZS/credential-orbit.git
 cd credential-orbit
-# serve locally
-python3 -m http.server 8080   # then open http://localhost:8080
+python3 -m http.server 8080     # then open http://localhost:8080
 ```
 
-No build step. Just open `index.html` or serve the folder.
+no dependencies, no build. or just open `index.html`.
 
-## Add your own credentials
+### add your own credentials
 
-Edit **`data.js`** — it's a plain array of objects. Drop image/PDF files into `certs/` and reference them like `certs/my-cert.webp`.
-
-Schema per entry:
+edit **`data.js`** — a plain array of objects. put image/pdf files in `certs/` and reference them as `certs/my-cert.webp`.
 
 ```js
 {
-  id: "unique-slug",                  // required, unique
+  id: "unique-slug",                    // required, unique
   name: "Credential Name",
   issuer: "Issuing Body",
-  category: ["Category A", "Category B"], // drives orbit rings + filters
-  weight: 3,                          // 1–5, prominence (5 sorts highest)
-  featured: true,                     // renders large at the top
-  dateObtained: "2025-03-02",         // ISO date or null (shows "NOT RECORDED")
+  category: ["Category A", "Category B"],  // drives orbit rings + filters
+  weight: 3,                            // 1–5 prominence
+  featured: true,                       // renders large at the top
+  dateObtained: "2025-03-02",           // ISO date or null
   description: "What this credential is.",
-  certificateImage: "certs/slug.webp",      // or null -> placeholder
-  certificatePdf: "certs/slug.pdf",         // optional, or null
-  verificationUrl: "https://.../verify",    // real public link, or null
-  verified: true                      // true ONLY if verificationUrl verifies it
+  certificateImage: "certs/slug.webp",        // or null → placeholder
+  certificatePdf: "certs/slug.pdf",           // optional
+  verificationUrl: "https://.../verify",      // real public link, or null
+  verified: true                        // true ONLY if the URL verifies it
 }
 ```
 
-Rules:
+rules of engagement:
 
-- Every `id` must be unique.
-- `dateObtained` should be `YYYY-MM-DD` or `null` — never invent a day.
-- Set `verified: true` only when `verificationUrl` actually verifies the credential.
-- Missing images/dates surface as placeholders or "NOT RECORDED" — no fake data.
+- `id`s must be unique.
+- `dateObtained` is `YYYY-MM-DD` **or `null`** — never invent a day.
+- `verified: true` implies a working public `verificationUrl`.
+- missing images/dates surface as placeholders / `NOT RECORDED` — honest by design.
 
-## License
+---
 
-MIT — do whatever you like. If it helps you, a star is appreciated.
+### license
+
+MIT — fork it, bend it, orbit it around your own sun.
+
+<p align="center">
+  <img src="assets/shield-star.svg" alt="if this helps you, leave a star" width="300"/>
+</p>

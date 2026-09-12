@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/orbit-hero.svg" alt="Credential Orbit — a 3D solar system for your certificates" width="100%"/>
+  <img src="assets/orbit-hero.svg" alt="Certiverse — a 3D solar system for your certificates" width="100%"/>
 </p>
 
 <p align="center">
@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <a href="https://adam-zs.github.io/credential-orbit/">
+  <a href="https://adam-zs.github.io/certiverse/">
     <img src="assets/shield-demo.svg" alt="VIEW LIVE DEMO" width="340"/>
   </a>
 </p>
@@ -22,7 +22,7 @@
 ### `>_` mission log
 
 ```txt
-> credential-orbit --boot
+> certiverse --boot
 initializing three.js core .................... OK
 calculating orbital mechanics (7 bodies) ....... OK
 mapping categories to ring colors ............. OK
@@ -85,8 +85,8 @@ each category is a **ring**, each credential a **node**, each person a **viewer*
 ### quick start
 
 ```bash
-git clone https://github.com/Adam-ZS/credential-orbit.git
-cd credential-orbit
+git clone https://github.com/Adam-ZS/certiverse.git
+cd certiverse
 python3 -m http.server 8080     # then open http://localhost:8080
 ```
 

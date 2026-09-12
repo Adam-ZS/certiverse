@@ -1,5 +1,5 @@
 /* ============================================================
-   CREDENTIAL ORBIT — DEMO DATA
+   CERTIVERSE — DEMO DATA
    All of the entries below are FICTIONAL sample records created
    to showcase the interface. Replace this file with your own
    real credentials.

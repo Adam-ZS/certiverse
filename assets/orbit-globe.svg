@@ -1,393 +1,1152 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 1400 800"
-     width="1400"
-     height="800">
+     viewBox="0 0 1600 900"
+     width="1600"
+     height="900"
+     preserveAspectRatio="xMidYMid slice">
 
-  <defs>
-    <!-- Background -->
-    <radialGradient id="bg" cx="50%" cy="75%" r="65%">
-      <stop offset="0" stop-color="#06161c"/>
-      <stop offset=".45" stop-color="#02080b"/>
-      <stop offset="1" stop-color="#010203"/>
-    </radialGradient>
+<style>
+<![CDATA[
 
-    <!-- Cyan atmosphere -->
-    <radialGradient id="atmosphere">
-      <stop offset="0" stop-color="#00eaff" stop-opacity=".22"/>
-      <stop offset=".45" stop-color="#00eaff" stop-opacity=".07"/>
-      <stop offset="1" stop-color="#00eaff" stop-opacity="0"/>
-    </radialGradient>
+  .slowSpin {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: spin 32s linear infinite;
+  }
 
-    <!-- Glow -->
-    <filter id="cyanGlow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="7" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+  .reverseSpin {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: spinReverse 42s linear infinite;
+  }
 
-    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="14"/>
-    </filter>
+  .fastSpin {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: spin 16s linear infinite;
+  }
 
-    <!-- Globe clip -->
-    <clipPath id="sphere">
-      <circle cx="700" cy="650" r="128"/>
-    </clipPath>
-  </defs>
+  .pulse {
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  .pulseSlow {
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  .float {
+    animation: float 5s ease-in-out infinite;
+  }
+
+  .float2 {
+    animation: float2 7s ease-in-out infinite;
+  }
+
+  .dash {
+    stroke-dasharray: 4 12;
+    animation: dash 5s linear infinite;
+  }
+
+  .dashFast {
+    stroke-dasharray: 2 8;
+    animation: dash 2.5s linear infinite;
+  }
+
+  .scan {
+    animation: scan 4s ease-in-out infinite;
+  }
+
+  .blink {
+    animation: blink 1.8s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  @keyframes spinReverse {
+    from { transform: rotate(360deg); }
+    to   { transform: rotate(0deg); }
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity:.35; transform:scale(.85); }
+    50% { opacity:1; transform:scale(1.2); }
+  }
+
+  @keyframes float {
+    0%,100% { transform:translateY(0); }
+    50% { transform:translateY(-13px); }
+  }
+
+  @keyframes float2 {
+    0%,100% { transform:translateY(0) rotate(0deg); }
+    50% { transform:translateY(10px) rotate(2deg); }
+  }
+
+  @keyframes dash {
+    to { stroke-dashoffset:-160; }
+  }
+
+  @keyframes scan {
+    0% { opacity:0; transform:translateY(-70px); }
+    30% { opacity:.7; }
+    70% { opacity:.7; }
+    100% { opacity:0; transform:translateY(70px); }
+  }
+
+  @keyframes blink {
+    0%,45%,100% { opacity:.25; }
+    50%,70% { opacity:1; }
+  }
+
+]]>
+</style>
+
+<defs>
 
   <!-- ================================================= -->
   <!-- BACKGROUND -->
   <!-- ================================================= -->
 
-  <rect width="1400" height="800" fill="url(#bg)"/>
+  <radialGradient id="background" cx="50%" cy="70%" r="75%">
+    <stop offset="0%" stop-color="#071920"/>
+    <stop offset="35%" stop-color="#030a0e"/>
+    <stop offset="72%" stop-color="#010407"/>
+    <stop offset="100%" stop-color="#000102"/>
+  </radialGradient>
 
-  <!-- Stars -->
-  <g fill="#a9b7c8">
-    <g opacity=".7">
-      <circle cx="83" cy="430" r=".7"/>
-      <circle cx="151" cy="505" r=".5"/>
-      <circle cx="205" cy="444" r=".8"/>
-      <circle cx="267" cy="558" r=".5"/>
-      <circle cx="331" cy="468" r=".6"/>
-      <circle cx="401" cy="530" r=".7"/>
-      <circle cx="462" cy="438" r=".5"/>
-      <circle cx="527" cy="492" r=".7"/>
-      <circle cx="572" cy="425" r=".5"/>
+  <radialGradient id="atmosphere">
+    <stop offset="0%" stop-color="#00eaff" stop-opacity=".25"/>
+    <stop offset="35%" stop-color="#00bcd4" stop-opacity=".11"/>
+    <stop offset="70%" stop-color="#673cff" stop-opacity=".04"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+  </radialGradient>
 
-      <circle cx="834" cy="442" r=".7"/>
-      <circle cx="891" cy="496" r=".5"/>
-      <circle cx="954" cy="428" r=".7"/>
-      <circle cx="1021" cy="476" r=".5"/>
-      <circle cx="1084" cy="438" r=".8"/>
-      <circle cx="1152" cy="516" r=".6"/>
-      <circle cx="1228" cy="449" r=".7"/>
-      <circle cx="1305" cy="535" r=".5"/>
-      <circle cx="1360" cy="431" r=".7"/>
-
-      <circle cx="120" cy="670" r=".6"/>
-      <circle cx="311" cy="687" r=".7"/>
-      <circle cx="425" cy="620" r=".5"/>
-      <circle cx="1001" cy="666" r=".6"/>
-      <circle cx="1172" cy="620" r=".7"/>
-      <circle cx="1290" cy="688" r=".5"/>
-    </g>
-
-    <!-- tiny cyan stars -->
-    <g fill="#00eaff" opacity=".5">
-      <circle cx="191" cy="475" r=".8"/>
-      <circle cx="441" cy="473" r=".6"/>
-      <circle cx="941" cy="471" r=".7"/>
-      <circle cx="1244" cy="494" r=".6"/>
-    </g>
-  </g>
+  <radialGradient id="core">
+    <stop offset="0%" stop-color="#ffffff"/>
+    <stop offset="15%" stop-color="#00ffff"/>
+    <stop offset="55%" stop-color="#00a8ff" stop-opacity=".6"/>
+    <stop offset="100%" stop-color="#005cff" stop-opacity="0"/>
+  </radialGradient>
 
   <!-- ================================================= -->
-  <!-- CENTRAL ATMOSPHERE -->
+  <!-- CERTIFICATION GRADIENTS -->
   <!-- ================================================= -->
 
-  <circle cx="700" cy="650"
-          r="245"
-          fill="url(#atmosphere)">
-    <animate attributeName="r"
-             values="225;250;225"
-             dur="5s"
-             repeatCount="indefinite"/>
-  </circle>
+  <linearGradient id="cyan" x1="0" x2="1">
+    <stop stop-color="#00ffff"/>
+    <stop offset="1" stop-color="#008cff"/>
+  </linearGradient>
+
+  <linearGradient id="purple" x1="0" x2="1">
+    <stop stop-color="#9c4dff"/>
+    <stop offset="1" stop-color="#5c3cff"/>
+  </linearGradient>
+
+  <linearGradient id="pink" x1="0" x2="1">
+    <stop stop-color="#ff4fa3"/>
+    <stop offset="1" stop-color="#ff2e69"/>
+  </linearGradient>
+
+  <linearGradient id="gold" x1="0" x2="1">
+    <stop stop-color="#ffe66d"/>
+    <stop offset="1" stop-color="#ff9d00"/>
+  </linearGradient>
+
+  <linearGradient id="green" x1="0" x2="1">
+    <stop stop-color="#d4ff45"/>
+    <stop offset="1" stop-color="#47ff88"/>
+  </linearGradient>
 
   <!-- ================================================= -->
-  <!-- ORBITAL SYSTEM -->
+  <!-- GLOWS -->
   <!-- ================================================= -->
 
-  <g transform="translate(700 650)"
-     fill="none"
-     stroke-linecap="round">
+  <filter id="glow"
+          x="-200%"
+          y="-200%"
+          width="400%"
+          height="400%">
 
-    <!-- outer cyan orbit -->
-    <ellipse rx="270" ry="74"
-             stroke="#00eaff"
-             stroke-width="1"
-             opacity=".35">
-      <animateTransform
-        attributeName="transform"
-        type="rotate"
-        from="0"
-        to="360"
-        dur="24s"
-        repeatCount="indefinite"/>
-    </ellipse>
+    <feGaussianBlur stdDeviation="5"
+                    result="blur"/>
 
-    <!-- purple orbit -->
-    <ellipse rx="250" ry="112"
-             stroke="#7545ff"
-             stroke-width="1"
-             opacity=".35">
-      <animateTransform
-        attributeName="transform"
-        type="rotate"
-        from="360"
-        to="0"
-        dur="32s"
-        repeatCount="indefinite"/>
-    </ellipse>
+    <feMerge>
+      <feMergeNode in="blur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
 
-    <!-- gold orbit -->
-    <ellipse rx="225" ry="145"
-             stroke="#ffb300"
-             stroke-width=".8"
-             opacity=".32">
-      <animateTransform
-        attributeName="transform"
-        type="rotate"
-        from="0"
-        to="360"
-        dur="38s"
-        repeatCount="indefinite"/>
-    </ellipse>
+  <filter id="bigGlow"
+          x="-200%"
+          y="-200%"
+          width="400%"
+          height="400%">
 
-    <!-- green tilted orbit -->
-    <ellipse rx="240" ry="100"
-             stroke="#9cff00"
-             stroke-width=".8"
-             opacity=".3"
-             transform="rotate(24)">
-      <animateTransform
-        attributeName="transform"
-        type="rotate"
-        from="24"
-        to="384"
-        dur="30s"
-        repeatCount="indefinite"/>
-    </ellipse>
+    <feGaussianBlur stdDeviation="22"/>
+  </filter>
 
-    <!-- pink equator -->
-    <ellipse rx="282" ry="21"
-             stroke="#ff4c92"
-             stroke-width=".8"
-             opacity=".5"/>
+  <filter id="tinyGlow"
+          x="-200%"
+          y="-200%"
+          width="400%"
+          height="400%">
 
-    <!-- vertical orbit -->
-    <ellipse rx="145" ry="275"
-             stroke="#00eaff"
-             stroke-width=".7"
-             opacity=".18">
-      <animateTransform
-        attributeName="transform"
-        type="rotate"
-        from="0"
-        to="360"
-        dur="42s"
-        repeatCount="indefinite"/>
-    </ellipse>
-
-  </g>
+    <feGaussianBlur stdDeviation="2"/>
+    <feMerge>
+      <feMergeNode/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
 
   <!-- ================================================= -->
-  <!-- 3D WIREFRAME GLOBE -->
+  <!-- HEX PATTERN -->
   <!-- ================================================= -->
 
-  <g fill="none"
-     stroke="#00eaff"
-     stroke-width="1.35"
-     opacity=".9">
+  <pattern id="hex"
+           width="42"
+           height="36"
+           patternUnits="userSpaceOnUse">
 
-    <!-- sphere -->
-    <circle cx="700" cy="650" r="128"/>
-
-    <!-- longitude -->
-    <ellipse cx="700" cy="650"
-             rx="102" ry="128"/>
-
-    <ellipse cx="700" cy="650"
-             rx="62" ry="128"/>
-
-    <ellipse cx="700" cy="650"
-             rx="25" ry="128"/>
-
-    <!-- latitude -->
-    <ellipse cx="700" cy="650"
-             rx="128" ry="38"/>
-
-    <ellipse cx="700" cy="650"
-             rx="128" ry="72"/>
-
-    <ellipse cx="700" cy="650"
-             rx="128" ry="103"/>
-
-  </g>
-
-  <!-- ================================================= -->
-  <!-- ROTATING INNER GEOMETRY -->
-  <!-- ================================================= -->
-
-  <g transform="translate(700 650)">
-
-    <g fill="none"
-       stroke="#00f0ff"
-       stroke-width="1"
-       opacity=".8">
-
-      <polygon points="0,-106
-                       92,-53
-                       92,53
-                       0,106
-                       -92,53
-                       -92,-53"/>
-
-      <polygon points="0,-77
-                       67,-39
-                       67,39
-                       0,77
-                       -67,39
-                       -67,-39"/>
-
-      <polygon points="0,-46
-                       40,-23
-                       40,23
-                       0,46
-                       -40,23
-                       -40,-23"/>
-
-      <path d="M-92 -53 L67 39"/>
-      <path d="M-92 53 L67 -39"/>
-      <path d="M92 -53 L-67 39"/>
-      <path d="M92 53 L-67 -39"/>
-
-    </g>
-
-    <animateTransform
-      attributeName="transform"
-      type="rotate"
-      from="0 700 650"
-      to="360 700 650"
-      dur="18s"
-      repeatCount="indefinite"/>
-
-  </g>
-
-  <!-- ================================================= -->
-  <!-- FLOATING CERTIFICATION NODES -->
-  <!-- ================================================= -->
-
-  <!-- left pink -->
-  <g filter="url(#cyanGlow)">
-    <circle cx="466" cy="657" r="8" fill="#ff5b9a"/>
-    <circle cx="466" cy="657" r="22"
-            fill="#ff5b9a"
-            opacity=".12"
-            filter="url(#softGlow)">
-      <animate attributeName="r"
-               values="16;30;16"
-               dur="2.4s"
-               repeatCount="indefinite"/>
-    </circle>
-  </g>
-
-  <!-- left green -->
-  <g filter="url(#cyanGlow)">
-    <circle cx="492" cy="685" r="10" fill="#9cff00"/>
-  </g>
-
-  <!-- upper left cyan -->
-  <g filter="url(#cyanGlow)">
-    <circle cx="584" cy="639" r="7" fill="#55dfff"/>
-  </g>
-
-  <!-- upper right purple -->
-  <g filter="url(#cyanGlow)">
-    <circle cx="871" cy="592" r="8" fill="#874cff"/>
-  </g>
-
-  <!-- bottom cyan -->
-  <g filter="url(#cyanGlow)">
-    <circle cx="525" cy="752" r="14" fill="#00dfff"/>
-  </g>
-
-  <!-- bottom gold -->
-  <g filter="url(#cyanGlow)">
-    <circle cx="766" cy="751" r="13" fill="#ffae00"/>
-  </g>
-
-  <!-- right cyan -->
-  <g filter="url(#cyanGlow)">
-    <circle cx="901" cy="731" r="9" fill="#00eaff"/>
-  </g>
-
-  <!-- ================================================= -->
-  <!-- ORBITING PARTICLES -->
-  <!-- ================================================= -->
-
-  <g>
-
-    <circle r="6" fill="#00eaff" filter="url(#cyanGlow)">
-      <animateMotion
-        dur="8s"
-        repeatCount="indefinite"
-        path="M430 650
-              C500 510 650 500 840 590
-              C990 660 850 790 690 760
-              C540 735 430 650 430 650"/>
-    </circle>
-
-    <circle r="5" fill="#8b4cff" filter="url(#cyanGlow)">
-      <animateMotion
-        dur="11s"
-        repeatCount="indefinite"
-        path="M930 650
-              C860 520 700 510 530 610
-              C430 680 570 790 730 770
-              C850 750 930 650 930 650"/>
-    </circle>
-
-  </g>
-
-  <!-- ================================================= -->
-  <!-- CENTER CORE -->
-  <!-- ================================================= -->
-
-  <circle cx="700"
-          cy="650"
-          r="7"
-          fill="#00ffff"
-          filter="url(#cyanGlow)">
-    <animate attributeName="r"
-             values="5;10;5"
-             dur="2s"
-             repeatCount="indefinite"/>
-  </circle>
-
-  <circle cx="700"
-          cy="650"
-          r="25"
+    <path d="M10 1L31 1L41 18L31 35L10 35L0 18Z"
           fill="none"
           stroke="#00eaff"
-          stroke-width=".7"
-          opacity=".35">
-    <animate attributeName="r"
-             values="18;35;18"
-             dur="3s"
-             repeatCount="indefinite"/>
-    <animate attributeName="opacity"
-             values=".5;0;.5"
-             dur="3s"
-             repeatCount="indefinite"/>
-  </circle>
+          stroke-width=".35"
+          opacity=".25"/>
+  </pattern>
 
   <!-- ================================================= -->
-  <!-- CERTIFICATION LABELS -->
+  <!-- CLIP -->
   <!-- ================================================= -->
 
-  <g font-family="monospace"
-     font-size="9"
-     letter-spacing="2"
-     fill="#8495aa">
+  <clipPath id="planetClip">
+    <circle cx="800" cy="650" r="155"/>
+  </clipPath>
 
-    <text x="430" y="675">CLOUD</text>
-    <text x="840" y="575">VERIFIED</text>
-    <text x="485" y="780">CERT-01</text>
-    <text x="890" y="755">CERT-07</text>
+</defs>
+
+<!-- ===================================================== -->
+<!-- SPACE -->
+<!-- ===================================================== -->
+
+<rect width="1600"
+      height="900"
+      fill="url(#background)"/>
+
+<!-- ===================================================== -->
+<!-- STARFIELD -->
+<!-- ===================================================== -->
+
+<g fill="#8fa7bd">
+
+  <g opacity=".7">
+
+    <circle cx="45" cy="410" r=".7"/>
+    <circle cx="83" cy="487" r=".5"/>
+    <circle cx="124" cy="533" r=".8"/>
+    <circle cx="169" cy="455" r=".5"/>
+    <circle cx="218" cy="601" r=".7"/>
+    <circle cx="263" cy="425" r=".5"/>
+    <circle cx="315" cy="512" r=".8"/>
+    <circle cx="367" cy="464" r=".6"/>
+    <circle cx="414" cy="573" r=".7"/>
+    <circle cx="459" cy="434" r=".5"/>
+    <circle cx="512" cy="518" r=".7"/>
+    <circle cx="559" cy="454" r=".5"/>
+    <circle cx="604" cy="402" r=".6"/>
+
+    <circle cx="982" cy="427" r=".7"/>
+    <circle cx="1040" cy="493" r=".5"/>
+    <circle cx="1088" cy="444" r=".8"/>
+    <circle cx="1135" cy="562" r=".6"/>
+    <circle cx="1190" cy="419" r=".7"/>
+    <circle cx="1245" cy="491" r=".5"/>
+    <circle cx="1297" cy="456" r=".7"/>
+    <circle cx="1354" cy="533" r=".5"/>
+    <circle cx="1412" cy="428" r=".8"/>
+    <circle cx="1470" cy="498" r=".6"/>
+    <circle cx="1520" cy="451" r=".5"/>
+    <circle cx="1560" cy="573" r=".7"/>
+
+    <circle cx="90" cy="742" r=".5"/>
+    <circle cx="188" cy="705" r=".7"/>
+    <circle cx="294" cy="761" r=".5"/>
+    <circle cx="391" cy="704" r=".8"/>
+    <circle cx="478" cy="786" r=".5"/>
+    <circle cx="1122" cy="751" r=".6"/>
+    <circle cx="1230" cy="704" r=".7"/>
+    <circle cx="1330" cy="771" r=".5"/>
+    <circle cx="1440" cy="719" r=".7"/>
+    <circle cx="1532" cy="780" r=".5"/>
 
   </g>
+
+  <!-- colored stars -->
+
+  <g fill="#00eaff">
+    <circle cx="197" cy="494" r="1"/>
+    <circle cx="442" cy="526" r="1"/>
+    <circle cx="1168" cy="476" r="1"/>
+    <circle cx="1370" cy="595" r="1"/>
+  </g>
+
+  <g fill="#8c55ff">
+    <circle cx="302" cy="587" r=".9"/>
+    <circle cx="1284" cy="620" r=".9"/>
+  </g>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- LARGE ATMOSPHERIC HALO -->
+<!-- ===================================================== -->
+
+<circle cx="800"
+        cy="650"
+        r="350"
+        fill="url(#atmosphere)"
+        filter="url(#bigGlow)"
+        class="pulseSlow"/>
+
+<!-- ===================================================== -->
+<!-- GIANT BACK ORBITS -->
+<!-- ===================================================== -->
+
+<g transform="translate(800 650)"
+   fill="none">
+
+  <!-- huge cyan orbit -->
+
+  <ellipse rx="390"
+           ry="105"
+           stroke="#00eaff"
+           stroke-width="1"
+           opacity=".2"
+           class="slowSpin"/>
+
+  <!-- violet orbit -->
+
+  <ellipse rx="355"
+           ry="170"
+           stroke="#784cff"
+           stroke-width="1"
+           opacity=".18"
+           class="reverseSpin"/>
+
+  <!-- amber -->
+
+  <ellipse rx="330"
+           ry="215"
+           stroke="#ffad00"
+           stroke-width=".8"
+           opacity=".18"
+           class="slowSpin"/>
+
+  <!-- vertical -->
+
+  <ellipse rx="170"
+           ry="360"
+           stroke="#00eaff"
+           stroke-width=".8"
+           opacity=".15"
+           class="reverseSpin"/>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- MAIN ORBITAL RINGS -->
+<!-- ===================================================== -->
+
+<g transform="translate(800 650)"
+   fill="none">
+
+  <ellipse rx="305"
+           ry="88"
+           stroke="url(#cyan)"
+           stroke-width="1"
+           opacity=".55"
+           class="dash"/>
+
+  <ellipse rx="280"
+           ry="128"
+           stroke="#7147ff"
+           stroke-width="1"
+           opacity=".42"
+           class="reverseSpin"/>
+
+  <ellipse rx="260"
+           ry="160"
+           stroke="#ffb000"
+           stroke-width=".8"
+           opacity=".38"
+           class="slowSpin"/>
+
+  <ellipse rx="245"
+           ry="190"
+           stroke="#9cff00"
+           stroke-width=".7"
+           opacity=".32"
+           transform="rotate(23)"
+           class="reverseSpin"/>
+
+  <!-- horizontal equator -->
+
+  <ellipse rx="320"
+           ry="25"
+           stroke="#ff4d99"
+           stroke-width=".9"
+           opacity=".55"/>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- ORBIT ENERGY TRAILS -->
+<!-- ===================================================== -->
+
+<g fill="none"
+   stroke-linecap="round">
+
+  <path d="M485 650
+           C555 530 710 505 850 548
+           C1010 596 1070 690 945 755"
+        stroke="#00eaff"
+        stroke-width="1.2"
+        opacity=".45"
+        class="dashFast"/>
+
+  <path d="M1110 650
+           C1045 545 890 505 745 550
+           C590 598 520 710 650 770"
+        stroke="#784cff"
+        stroke-width="1"
+        opacity=".4"
+        class="dash"/>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- PLANET ATMOSPHERE -->
+<!-- ===================================================== -->
+
+<circle cx="800"
+        cy="650"
+        r="175"
+        fill="#00eaff"
+        opacity=".025"/>
+
+<circle cx="800"
+        cy="650"
+        r="165"
+        fill="none"
+        stroke="#00eaff"
+        stroke-width="1"
+        opacity=".22"/>
+
+<circle cx="800"
+        cy="650"
+        r="158"
+        fill="none"
+        stroke="#00ffff"
+        stroke-width="2"
+        opacity=".18"
+        filter="url(#glow)"/>
+
+<!-- ===================================================== -->
+<!-- PLANET HEX SURFACE -->
+<!-- ===================================================== -->
+
+<circle cx="800"
+        cy="650"
+        r="153"
+        fill="url(#hex)"
+        opacity=".65"/>
+
+<!-- ===================================================== -->
+<!-- 3D GLOBE -->
+<!-- ===================================================== -->
+
+<g fill="none"
+   stroke="#00eaff"
+   stroke-width="1.25"
+   opacity=".82">
+
+  <!-- outline -->
+
+  <circle cx="800"
+          cy="650"
+          r="155"/>
+
+  <!-- longitude -->
+
+  <ellipse cx="800"
+           cy="650"
+           rx="125"
+           ry="155"/>
+
+  <ellipse cx="800"
+           cy="650"
+           rx="82"
+           ry="155"/>
+
+  <ellipse cx="800"
+           cy="650"
+           rx="42"
+           ry="155"/>
+
+  <!-- latitude -->
+
+  <ellipse cx="800"
+           cy="650"
+           rx="155"
+           ry="45"/>
+
+  <ellipse cx="800"
+           cy="650"
+           rx="155"
+           ry="82"/>
+
+  <ellipse cx="800"
+           cy="650"
+           rx="155"
+           ry="116"/>
+
+  <!-- diagonals -->
+
+  <path d="M645 650H955"/>
+
+  <path d="M674 548L926 752"/>
+
+  <path d="M674 752L926 548"/>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- ROTATING INNER POLYHEDRON -->
+<!-- ===================================================== -->
+
+<g transform="translate(800 650)"
+   class="fastSpin"
+   fill="none"
+   stroke="#00f0ff">
+
+  <polygon
+    points="0,-125
+            108,-62
+            108,62
+            0,125
+            -108,62
+            -108,-62"
+    stroke-width="1.3"
+    opacity=".9"/>
+
+  <polygon
+    points="0,-92
+            80,-46
+            80,46
+            0,92
+            -80,46
+            -80,-46"
+    stroke-width="1"
+    opacity=".7"/>
+
+  <polygon
+    points="0,-52
+            45,-26
+            45,26
+            0,52
+            -45,26
+            -45,-26"
+    stroke-width=".8"
+    opacity=".55"/>
+
+  <path d="M-108 -62L80 46"/>
+  <path d="M-108 62L80 -46"/>
+  <path d="M108 -62L-80 46"/>
+  <path d="M108 62L-80 -46"/>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- SCANNING PLANE -->
+<!-- ===================================================== -->
+
+<g clip-path="url(#planetClip)"
+   class="scan">
+
+  <rect x="640"
+        y="510"
+        width="320"
+        height="2"
+        fill="#00ffff"
+        opacity=".7"
+        filter="url(#glow)"/>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- CENTER CORE -->
+<!-- ===================================================== -->
+
+<circle cx="800"
+        cy="650"
+        r="65"
+        fill="url(#core)"
+        opacity=".25"
+        filter="url(#bigGlow)"
+        class="pulseSlow"/>
+
+<circle cx="800"
+        cy="650"
+        r="9"
+        fill="#00ffff"
+        filter="url(#glow)"
+        class="pulse"/>
+
+<circle cx="800"
+        cy="650"
+        r="28"
+        fill="none"
+        stroke="#00ffff"
+        stroke-width="1"
+        opacity=".6"
+        class="pulse"/>
+
+<!-- ===================================================== -->
+<!-- ENERGY CONNECTIONS -->
+<!-- ===================================================== -->
+
+<g fill="none"
+   stroke-linecap="round">
+
+  <path d="M525 750
+           Q645 650 800 650"
+        stroke="#00eaff"
+        stroke-width="1"
+        opacity=".55"
+        class="dashFast"/>
+
+  <path d="M1070 731
+           Q935 660 800 650"
+        stroke="#8c4dff"
+        stroke-width="1"
+        opacity=".5"
+        class="dashFast"/>
+
+  <path d="M490 680
+           Q625 630 800 650"
+        stroke="#9cff00"
+        stroke-width=".8"
+        opacity=".4"/>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- CERTIFICATION NODES -->
+<!-- ===================================================== -->
+
+<!-- CYAN NODE -->
+
+<g filter="url(#glow)">
+
+  <circle cx="525"
+          cy="750"
+          r="15"
+          fill="#00eaff"
+          opacity=".12"
+          class="pulse"/>
+
+  <circle cx="525"
+          cy="750"
+          r="10"
+          fill="#00eaff"/>
+
+  <circle cx="525"
+          cy="750"
+          r="3"
+          fill="#ffffff"/>
+
+</g>
+
+<!-- GREEN -->
+
+<g filter="url(#glow)">
+
+  <circle cx="490"
+          cy="680"
+          r="25"
+          fill="#9cff00"
+          opacity=".1"
+          class="pulse"/>
+
+  <circle cx="490"
+          cy="680"
+          r="10"
+          fill="#9cff00"/>
+
+</g>
+
+<!-- PINK -->
+
+<g filter="url(#glow)">
+
+  <circle cx="465"
+          cy="650"
+          r="22"
+          fill="#ff4f9a"
+          opacity=".1"
+          class="pulse"/>
+
+  <circle cx="465"
+          cy="650"
+          r="9"
+          fill="#ff4f9a"/>
+
+</g>
+
+<!-- PURPLE -->
+
+<g filter="url(#glow)">
+
+  <circle cx="930"
+          cy="575"
+          r="24"
+          fill="#874cff"
+          opacity=".12"
+          class="pulse"/>
+
+  <circle cx="930"
+          cy="575"
+          r="9"
+          fill="#874cff"/>
+
+</g>
+
+<!-- GOLD -->
+
+<g filter="url(#glow)">
+
+  <circle cx="935"
+          cy="750"
+          r="28"
+          fill="#ffae00"
+          opacity=".12"
+          class="pulse"/>
+
+  <circle cx="935"
+          cy="750"
+          r="13"
+          fill="#ffae00"/>
+
+</g>
+
+<!-- RIGHT CYAN -->
+
+<g filter="url(#glow)">
+
+  <circle cx="1080"
+          cy="730"
+          r="20"
+          fill="#00eaff"
+          opacity=".1"
+          class="pulse"/>
+
+  <circle cx="1080"
+          cy="730"
+          r="9"
+          fill="#00eaff"/>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- ORBITING SATELLITES -->
+<!-- ===================================================== -->
+
+<g class="slowSpin"
+   transform="translate(800 650)">
+
+  <g transform="translate(305 -88)">
+
+    <rect x="-8"
+          y="-5"
+          width="16"
+          height="10"
+          rx="2"
+          fill="#071218"
+          stroke="#00eaff"
+          stroke-width="1"/>
+
+    <path d="M-18 0H-8M8 0H18"
+          stroke="#00eaff"
+          stroke-width="1"/>
+
+    <circle r="2"
+            fill="#00ffff"
+            filter="url(#tinyGlow)"/>
+
+  </g>
+
+</g>
+
+<g class="reverseSpin"
+   transform="translate(800 650)">
+
+  <g transform="translate(-280 128)">
+
+    <rect x="-7"
+          y="-5"
+          width="14"
+          height="10"
+          rx="2"
+          fill="#090712"
+          stroke="#8b4cff"
+          stroke-width="1"/>
+
+    <path d="M-16 0H-7M7 0H16"
+          stroke="#8b4cff"
+          stroke-width="1"/>
+
+  </g>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- HOLOGRAPHIC DATA RINGS -->
+<!-- ===================================================== -->
+
+<g transform="translate(800 650)"
+   fill="none">
+
+  <circle r="205"
+          stroke="#00eaff"
+          stroke-width=".6"
+          opacity=".3"
+          stroke-dasharray="1 14"
+          class="slowSpin"/>
+
+  <circle r="225"
+          stroke="#7147ff"
+          stroke-width=".6"
+          opacity=".25"
+          stroke-dasharray="2 18"
+          class="reverseSpin"/>
+
+  <circle r="245"
+          stroke="#ff4fa0"
+          stroke-width=".5"
+          opacity=".18"
+          stroke-dasharray="1 20"
+          class="slowSpin"/>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- FLOATING HUD LABELS -->
+<!-- ===================================================== -->
+
+<g font-family="monospace"
+   letter-spacing="2">
+
+  <!-- left label -->
+
+  <g opacity=".8">
+
+    <path d="M390 590H455L480 650"
+          fill="none"
+          stroke="#00eaff"
+          stroke-width=".7"/>
+
+    <rect x="300"
+          y="560"
+          width="145"
+          height="42"
+          rx="4"
+          fill="#021015"
+          fill-opacity=".65"
+          stroke="#00eaff"
+          stroke-opacity=".35"/>
+
+    <text x="315"
+          y="578"
+          font-size="8"
+          fill="#00eaff">
+      CREDENTIAL
+    </text>
+
+    <text x="315"
+          y="593"
+          font-size="10"
+          fill="#d8faff">
+      CLOUD ARCHITECT
+    </text>
+
+  </g>
+
+  <!-- right label -->
+
+  <g opacity=".8">
+
+    <path d="M1110 570H1015L930 575"
+          fill="none"
+          stroke="#874cff"
+          stroke-width=".7"/>
+
+    <rect x="1110"
+          y="545"
+          width="165"
+          height="42"
+          rx="4"
+          fill="#080512"
+          fill-opacity=".7"
+          stroke="#874cff"
+          stroke-opacity=".4"/>
+
+    <text x="1125"
+          y="563"
+          font-size="8"
+          fill="#9d70ff">
+      STATUS
+    </text>
+
+    <text x="1125"
+          y="578"
+          font-size="10"
+          fill="#f0eaff">
+      VERIFIED
+    </text>
+
+  </g>
+
+  <!-- lower label -->
+
+  <g opacity=".7">
+
+    <rect x="1030"
+          y="785"
+          width="160"
+          height="38"
+          rx="4"
+          fill="#07100a"
+          fill-opacity=".7"
+          stroke="#9cff00"
+          stroke-opacity=".35"/>
+
+    <text x="1045"
+          y="801"
+          font-size="8"
+          fill="#9cff00">
+      NETWORK
+    </text>
+
+    <text x="1045"
+          y="815"
+          font-size="9"
+          fill="#ddffd0">
+      ACTIVE NODE
+    </text>
+
+  </g>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- FLOATING CERTIFICATION MINI CARDS -->
+<!-- ===================================================== -->
+
+<!-- CARD 01 -->
+
+<g class="float"
+   transform="translate(340 690)">
+
+  <rect width="130"
+        height="62"
+        rx="7"
+        fill="#041116"
+        fill-opacity=".88"
+        stroke="#00eaff"
+        stroke-opacity=".55"/>
+
+  <rect x="10"
+        y="11"
+        width="30"
+        height="30"
+        rx="6"
+        fill="#00eaff"
+        opacity=".1"
+        stroke="#00eaff"/>
+
+  <path d="M20 27L25 32L34 20"
+        fill="none"
+        stroke="#00ffff"
+        stroke-width="2"/>
+
+  <text x="50"
+        y="25"
+        fill="#00ffff"
+        font-family="monospace"
+        font-size="8"
+        letter-spacing="1">
+    CERT-01
+  </text>
+
+  <text x="50"
+        y="39"
+        fill="#b8c9d8"
+        font-family="monospace"
+        font-size="7">
+    VERIFIED
+  </text>
+
+  <circle cx="116"
+          cy="16"
+          r="3"
+          fill="#00ffcc"
+          class="blink"/>
+
+</g>
+
+<!-- CARD 02 -->
+
+<g class="float2"
+   transform="translate(1080 610)">
+
+  <rect width="145"
+        height="68"
+        rx="7"
+        fill="#080513"
+        fill-opacity=".9"
+        stroke="#8b4cff"
+        stroke-opacity=".55"/>
+
+  <circle cx="24"
+          cy="25"
+          r="13"
+          fill="none"
+          stroke="#8b4cff"/>
+
+  <path d="M18 25L23 30L31 20"
+        fill="none"
+        stroke="#b889ff"
+        stroke-width="2"/>
+
+  <text x="46"
+        y="25"
+        fill="#b98cff"
+        font-family="monospace"
+        font-size="8"
+        letter-spacing="1">
+    CERT-07
+  </text>
+
+  <text x="46"
+        y="40"
+        fill="#d8caff"
+        font-family="monospace"
+        font-size="7">
+    AI ENGINEERING
+  </text>
+
+  <text x="46"
+        y="53"
+        fill="#8f7ba8"
+        font-family="monospace"
+        font-size="6">
+    VERIFIED NODE
+  </text>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- MOVING SIGNAL PARTICLES -->
+<!-- ===================================================== -->
+
+<g>
+
+  <circle r="5"
+          fill="#00ffff"
+          filter="url(#glow)">
+
+    <animateMotion
+      dur="5s"
+      repeatCount="indefinite"
+      path="M480 650
+            C560 520 720 510 900 570
+            C1030 615 1050 720 935 750
+            C800 785 610 755 480 650"/>
+
+  </circle>
+
+  <circle r="4"
+          fill="#9b55ff"
+          filter="url(#glow)">
+
+    <animateMotion
+      dur="7s"
+      repeatCount="indefinite"
+      path="M1080 730
+            C990 530 790 505 620 580
+            C490 640 520 750 650 780
+            C820 815 1000 770 1080 730"/>
+
+  </circle>
+
+  <circle r="3"
+          fill="#ffb000"
+          filter="url(#glow)">
+
+    <animateMotion
+      dur="4s"
+      repeatCount="indefinite"
+      path="M470 650
+            C600 570 760 530 930 575
+            C1000 600 1040 680 935 750"/>
+
+  </circle>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- DATA POINTS -->
+<!-- ===================================================== -->
+
+<g fill="#00eaff">
+
+  <circle cx="655" cy="555" r="2" class="blink"/>
+  <circle cx="730" cy="535" r="2" class="pulse"/>
+  <circle cx="845" cy="560" r="2" class="blink"/>
+  <circle cx="900" cy="635" r="2" class="pulse"/>
+  <circle cx="855" cy="720" r="2" class="blink"/>
+  <circle cx="720" cy="755" r="2" class="pulse"/>
+  <circle cx="625" cy="705" r="2" class="blink"/>
+  <circle cx="600" cy="625" r="2" class="pulse"/>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- HUD CORNER MARKERS -->
+<!-- ===================================================== -->
+
+<g stroke="#00eaff"
+   stroke-width=".7"
+   opacity=".35"
+   fill="none">
+
+  <path d="M240 600H275M258 582V618"/>
+  <path d="M1325 600H1360M1342 582V618"/>
+
+  <path d="M330 820H365M347 802V838"/>
+  <path d="M1235 820H1270M1252 802V838"/>
+
+</g>
+
+<!-- ===================================================== -->
+<!-- FINAL GLOW -->
+<!-- ===================================================== -->
+
+<circle cx="800"
+        cy="650"
+        r="4"
+        fill="#ffffff"
+        filter="url(#glow)"/>
 
 </svg>

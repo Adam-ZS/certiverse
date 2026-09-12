@@ -6,6 +6,8 @@ An interactive, dark-mode credential showcase rendered as a 3D solar system — 
 >
 > The demo ships with fictional sample data so you can see the UI in action without exposing anyone's credentials.
 
+![Credential Orbit screenshot](assets/screenshot.png)
+
 ## Features
 
 - Interactive Three.js 3D core — orbit rings per category, hover tooltips, click-to-filter

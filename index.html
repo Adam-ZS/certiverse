@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Credential Orbit — 3D Credential Showcase (Demo)</title>
+<meta name="description" content="An interactive 3D showcase for certifications and credentials. Demo build with sample data." />
+<link rel="icon" type="image/png" href="favicon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Credential Orbit — 3D Credential Showcase" />
+  <meta property="og:description" content="An interactive 3D showcase for certifications. Open source demo with sample data." />
+  <meta property="og:site_name" content="Credential Orbit" />
+  <meta property="og:url" content="https://adam-zs.github.io/credential-orbit/" />
+  <meta property="og:image" content="https://adam-zs.github.io/credential-orbit/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Credential Orbit — 3D Credential Showcase" />
+<meta name="twitter:description" content="A documented archive of certifications across cybersecurity, AI, and law." />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- BOOT SEQUENCE -->
+  <div id="boot" aria-hidden="true">
+    <pre id="boot-text"></pre>
+    <button id="boot-skip">SKIP</button>
+  </div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-logo">CREDENTIAL // ORBIT</div>
+    <div class="nav-status">SYSTEM: <span class="online">ONLINE</span></div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>CREDENTIAL<br/>ORBIT</h1>
+    <p class="hero-sub">An interactive 3D showcase for certifications. This is a demo with sample data — fork it and add your own.</p>
+    <div class="stats-strip">
+      <div class="stat"><span id="stat-total">0</span><label>CREDENTIALS</label></div>
+      <div class="stat"><span id="stat-verified">0</span><label>VERIFIED</label></div>
+      <div class="stat"><span id="stat-categories">0</span><label>CATEGORIES</label></div>
+    </div>
+  </section>
+
+  <!-- 3D CORE -->
+  <section class="core-section">
+    <canvas id="core-canvas"></canvas>
+    <div id="core-fallback-note" class="core-fallback-note" hidden>3D view unavailable on this device — showing full archive below.</div>
+    <div id="node-tooltip" class="node-tooltip" hidden></div>
+  </section>
+
+  <!-- ARCHIVE -->
+  <section class="archive" id="archive">
+    <div id="data-warning" class="data-warning" hidden>
+      ⚠ NO CERTIFICATION DATA LOADED — data.js failed to load or has a syntax error
+      (a missing comma or bracket is the usual cause). Open your browser console (F12)
+      for the exact line, or re-check data.js against the example format.
+    </div>
+    <div class="archive-controls">
+      <div class="controls-row">
+        <input id="search" type="text" placeholder="SEARCH CREDENTIALS... ( / )" autocomplete="off" />
+        <button id="reset-filters" class="reset-btn" type="button">RESET</button>
+      </div>
+      <div class="controls-row">
+        <span class="sort-label">SORT</span>
+        <div id="sort-buttons" class="sort-buttons">
+          <button class="chip sort-btn active" type="button" data-sort="featured">FEATURED</button>
+          <button class="chip sort-btn" type="button" data-sort="newest">NEWEST</button>
+          <button class="chip sort-btn" type="button" data-sort="oldest">OLDEST</button>
+        </div>
+      </div>
+      <p id="result-count" class="result-count" aria-live="polite"></p>
+      <div id="category-filters" class="category-filters"></div>
+    </div>
+    <div id="grid" class="grid"></div>
+    <p id="empty-state" class="empty-state" hidden>No credentials match your search/filter.</p>
+  </section>
+
+  <footer class="footer">
+    <div>CREDENTIAL ARCHIVE — ARCHIVE VERSION 2.1</div>
+    <div>BUILT WITH HTML / CSS / JS / THREE.JS</div>
+    <div class="footer-links">
+      <a href="https://github.com/Adam-ZS/credential-orbit" target="_blank" rel="noopener noreferrer">SOURCE CODE ↗</a>
+      <span class="sep">·</span>
+      <a href="https://adam-zs.github.io/credential-orbit/" target="_blank" rel="noopener noreferrer">LIVE DEMO ↗</a>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div id="modal-backdrop" class="modal-backdrop" hidden>
+    <div id="modal" class="modal" role="dialog" aria-modal="true">
+      <button id="modal-close" aria-label="Close">✕</button>
+      <div class="modal-body">
+        <div class="modal-image-wrap">
+          <img id="modal-image" alt="" />
+        </div>
+        <div class="modal-info">
+          <div id="modal-categories" class="modal-categories"></div>
+          <h2 id="modal-name"></h2>
+          <p id="modal-issuer" class="muted"></p>
+          <dl class="meta">
+            <dt>DATE OBTAINED</dt><dd id="modal-date">—</dd>
+            <dt id="modal-expiry-label" hidden>EXPIRES</dt><dd id="modal-expiry" hidden>—</dd>
+          </dl>
+          <p id="modal-description"></p>
+          <div id="modal-verify-status" class="verify-status"></div>
+          <div class="modal-actions">
+            <a id="modal-verify-btn" class="btn btn-primary" target="_blank" rel="noopener">VERIFY CREDENTIAL ↗</a>
+            <a id="modal-pdf-btn" class="btn btn-secondary" target="_blank" rel="noopener">OPEN PDF ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
